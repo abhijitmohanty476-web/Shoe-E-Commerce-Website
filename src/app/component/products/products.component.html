@@ -1,0 +1,42 @@
+
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+
+<div class="container py-5">
+    
+
+  <div class="text-center mb-5">
+
+    <h2 class="fw-bold">
+      Our Shoes
+    </h2>
+
+    <p class="text-muted">
+      Explore our latest footwear collection.
+    </p>
+
+  </div>
+
+  <button
+    class="btn btn-outline-dark my-3"
+    routerLink="/products">
+
+    <i class="bi bi-arrow-left"></i>
+
+    Back to Products
+
+</button>
+
+
+  <app-product-card
+    [products]="products">
+  </app-product-card>
+
+</div>

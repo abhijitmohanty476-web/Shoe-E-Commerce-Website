@@ -1,0 +1,29 @@
+.image-card{
+
+    border:1px solid #eee;
+
+    border-radius:15px;
+
+    padding:25px;
+
+    background:#fff;
+
+    text-align:center;
+
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+.image-card img{
+
+    max-height:400px;
+
+    object-fit:contain;
+
+}
+
+table th{
+
+    width:150px;
+
+}

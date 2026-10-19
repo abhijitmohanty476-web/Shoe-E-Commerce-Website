@@ -1,0 +1,15 @@
+footer p {
+    color: #ddd;
+    line-height: 1.6;
+}
+
+
+footer a:hover {
+    color: #ffc107 !important;
+}
+
+
+footer i:hover {
+    color: #ffc107;
+    cursor: pointer;
+}

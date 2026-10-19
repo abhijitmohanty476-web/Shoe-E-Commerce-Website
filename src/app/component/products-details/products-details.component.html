@@ -1,0 +1,483 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+<button
+    class="btn btn-outline-dark my-3"
+    routerLink="/products">
+
+    <i class="bi bi-arrow-left"></i>
+
+    Back to Products
+
+</button>
+
+
+<div class="row"  *ngIf="product">
+
+    <!-- PRODUCT IMAGE -->
+
+    <div class="col-lg-5">
+
+        <div class="image-card">
+
+            <img
+                [src]="serverUrl + product.productImage"
+                class="img-fluid"
+                [alt]="product.productName">
+
+        </div>
+
+    </div>
+
+
+    <!-- PRODUCT DETAILS -->
+
+    <div class="col-lg-7">
+
+        <span class="badge bg-primary mb-3">
+
+            {{ product.brandName }}
+
+        </span>
+
+
+        <h2 class="fw-bold">
+
+            {{ product.productName }}
+
+        </h2>
+
+
+        <h3 class="text-success my-3">
+
+            {{ product.price | currency:'INR' }}
+
+        </h3>
+
+
+        <table class="table">
+
+            <tr>
+
+                <th>Brand</th>
+
+                <td>
+                    {{ product.brandName }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Color</th>
+
+                <td>
+                    {{ product.color }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Size</th>
+
+                <td>
+                    {{ product.size }}
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Popular</th>
+
+                <td>
+
+                    <span
+                        class="badge bg-warning"
+                        *ngIf="product.isPopular">
+
+                        Yes
+
+                    </span>
+
+
+                    <span
+                        class="badge bg-secondary"
+                        *ngIf="!product.isPopular">
+
+                        No
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Stock</th>
+
+                <td>
+
+                    <span
+                        class="badge bg-success"
+                        *ngIf="product.isStock">
+
+                        In Stock
+
+                    </span>
+
+
+                    <span
+                        class="badge bg-danger"
+                        *ngIf="!product.isStock">
+
+                        Out Of Stock
+
+                    </span>
+
+                </td>
+
+            </tr>
+
+
+            <tr>
+
+                <th>Created</th>
+
+                <td>
+
+                    {{ product.createdDate | date:'dd MMM yyyy' }}
+
+                </td>
+
+            </tr>
+
+        </table>
+
+
+     
+
+        <button
+            *ngIf="product.isStock"
+            class="btn btn-success btn-lg px-5"
+            (click)="buyProduct()">
+
+            <i class="bi bi-cart-check"></i>
+
+            Buy Now
+
+        </button>
+
+
+       
+
+        <button
+            *ngIf="!product.isStock"
+            class="btn btn-secondary btn-lg px-5"
+            disabled>
+
+            Out Of Stock
+
+        </button>
+
+    </div>
+
+</div>
+
+
+
+<div
+    id="orderForm"
+    class="row mt-5"
+    *ngIf="showOrderForm">
+
+    <div class="col-lg-8 mx-auto">
+
+        <div class="card shadow border-0">
+
+            <div class="card-header bg-dark text-white">
+
+                <h4 class="mb-0">
+
+                    <i class="bi bi-bag-check"></i>
+
+                    Place Your Order
+
+                </h4>
+
+            </div>
+
+
+            <div class="card-body p-4">
+
+                <form
+                    [formGroup]="orderForm"
+                    (ngSubmit)="submitOrder()">
+
+
+                   
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+
+                            Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="customerName"
+                            placeholder="Enter your name"
+                            [class.is-invalid]="
+                                f['customerName'].touched &&
+                                f['customerName'].invalid
+                            ">
+
+
+                        <div
+                            class="invalid-feedback"
+                            *ngIf="
+                                f['customerName'].touched &&
+                                f['customerName'].errors
+                            ">
+
+                            <span
+                                *ngIf="
+                                    f['customerName'].errors['required']
+                                ">
+
+                                Name is required.
+
+                            </span>
+
+
+                            <span
+                                *ngIf="
+                                    f['customerName'].errors['minlength']
+                                ">
+
+                                Name must contain at least 3 characters.
+
+                            </span>
+
+
+                            <span
+                                *ngIf="
+                                    f['customerName'].errors['pattern']
+                                ">
+
+                                Name should contain only letters
+                                and spaces.
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- MOBILE -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+
+                            Mobile
+
+                        </label>
+
+                        <input
+                            type="text"
+                            class="form-control"
+                            formControlName="mobileNumber"
+                            maxlength="10"
+                            placeholder="Enter mobile number"
+                            [class.is-invalid]="
+                                f['mobileNumber'].touched &&
+                                f['mobileNumber'].invalid
+                            ">
+
+
+                        <div
+                            class="invalid-feedback"
+                            *ngIf="
+                                f['mobileNumber'].touched &&
+                                f['mobileNumber'].errors
+                            ">
+
+                            <span
+                                *ngIf="
+                                    f['mobileNumber'].errors['required']
+                                ">
+
+                                Mobile number is required.
+
+                            </span>
+
+
+                            <span
+                                *ngIf="
+                                    f['mobileNumber'].errors['pattern']
+                                ">
+
+                                Enter a valid 10 digit mobile number.
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label fw-bold">
+
+                            Email
+
+                        </label>
+
+                        <input
+                            type="email"
+                            class="form-control"
+                            formControlName="email"
+                            placeholder="Enter email"
+                            [class.is-invalid]="
+                                f['email'].touched &&
+                                f['email'].invalid
+                            ">
+
+
+                        <div
+                            class="invalid-feedback"
+                            *ngIf="
+                                f['email'].touched &&
+                                f['email'].errors
+                            ">
+
+                            <span
+                                *ngIf="
+                                    f['email'].errors['required']
+                                ">
+
+                                Email is required.
+
+                            </span>
+
+
+                            <span
+                                *ngIf="
+                                    f['email'].errors['email']
+                                ">
+
+                                Enter a valid email address.
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Address
+
+                        </label>
+
+                        <textarea
+                            rows="4"
+                            class="form-control"
+                            formControlName="address"
+                            placeholder="Enter complete address"
+                            [class.is-invalid]="
+                                f['address'].touched &&
+                                f['address'].invalid
+                            ">
+                        </textarea>
+
+
+                        <div
+                            class="invalid-feedback"
+                            *ngIf="
+                                f['address'].touched &&
+                                f['address'].errors
+                            ">
+
+                            <span
+                                *ngIf="
+                                    f['address'].errors['required']
+                                ">
+
+                                Address is required.
+
+                            </span>
+
+
+                            <span
+                                *ngIf="
+                                    f['address'].errors['minlength']
+                                ">
+
+                                Address must contain at least
+                                10 characters.
+
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                   
+
+                    <button
+                        type="submit"
+                        class="btn btn-success btn-lg me-2">
+
+                        <i class="bi bi-check-circle"></i>
+
+                        Submit Order
+
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="btn btn-outline-secondary btn-lg"
+                        (click)="showOrderForm = false">
+
+                        Cancel
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+

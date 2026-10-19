@@ -1,0 +1,130 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.8)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate-pulse"
+  [fullScreen]="true"
+>
+  <p style="color: white">Loading...</p>
+</ngx-spinner>
+
+
+<section class="hero-section">
+  <div class="container">
+    <div class="hero-content">
+      <div class="row align-items-center">
+        <!-- Hero Text -->
+        <div class="col-lg-6 col-md-7">
+          <div class="hero-text">
+            <span class="hero-badge">
+              <i class="bi bi-stars"></i>
+              PREMIUM FOOTWEAR
+            </span>
+
+            <h1 class="hero-title">
+              Step Into
+              <span>Style</span>
+            </h1>
+
+            <p class="lead hero-description">
+              Discover premium shoes designed for comfort, performance and
+              fashion.
+            </p>
+
+            <div class="hero-buttons">
+              <button
+                class="btn btn-warning btn-lg hero-btn"
+                routerLink="/products"
+              >
+                Shop Now
+                <i class="bi bi-arrow-right ms-2"></i>
+              </button>
+
+              <span class="hero-offer">
+                <i class="bi bi-truck"></i>
+                Premium Quality
+              </span>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="col-lg-6 col-md-5 text-center">
+          <div class="hero-image-wrapper">
+            <div class="hero-circle"></div>
+
+            <img
+              src="https://images.unsplash.com/photo-1542291026-7eec264c27ff"
+              class="img-fluid shoe-banner"
+              alt="Premium Shoes"
+            />
+
+            <div class="floating-card floating-card-one">
+              <i class="bi bi-check-circle-fill"></i>
+
+              <div>
+                <strong>Premium</strong>
+                <small>Quality</small>
+              </div>
+            </div>
+
+            <div class="floating-card floating-card-two">
+              <i class="bi bi-star-fill"></i>
+
+              <div>
+                <strong>Top Rated</strong>
+                <small>Collection</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="container py-5">
+  <h2 class="text-center fw-bold mb-5">Popular Brands</h2>
+
+  <div class="row g-4">
+    <div class="col-lg-3 col-md-6" *ngFor="let brand of brands">
+      <div class="category-card">
+        <div class="category-icon">
+          <i class="bi bi-shop"></i>
+        </div>
+
+        <div class="category-content">
+          <h4>{{ brand.brandName }}</h4>
+
+          <p>Explore {{ brand.brandName }} shoes</p>
+
+          <button
+            class="category-btn"
+            [routerLink]="['/products', brand.brandId]"
+          >
+            View Collection
+
+            <i class="bi bi-arrow-up-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="container my-5">
+  <div class="text-center mb-5">
+    <h2 class="fw-bold">Featured Shoes</h2>
+
+    <p class="text-muted">Explore our most popular footwear collection.</p>
+  </div>
+
+  <app-product-card [products]="products"> </app-product-card>
+</section>
+
+
+<app-happy-customer></app-happy-customer>

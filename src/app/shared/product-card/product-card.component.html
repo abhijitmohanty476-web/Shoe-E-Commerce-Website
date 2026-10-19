@@ -1,0 +1,109 @@
+<div class="row g-4">
+
+  <div
+    class="col-lg-3 col-md-6"
+    *ngFor="let product of products">
+
+    <div class="card product-card h-100 shadow">
+
+      
+      <div class="product-image">
+
+        <img
+          [src]="serverUrl + product.productImage"
+          [alt]="product.productName">
+
+      </div>
+
+
+      <div class="card-body">
+
+        
+        <span class="badge bg-primary mb-2">
+          {{ product.brandName }}
+        </span>
+
+
+        
+        <h5 class="fw-bold mb-2">
+          {{ product.productName }}
+        </h5>
+
+
+        
+        <p class="mb-1">
+
+          <i class="bi bi-palette-fill text-danger"></i>
+
+          <strong>Color :</strong>
+
+          {{ product.color }}
+
+        </p>
+
+
+       
+        <p class="mb-1">
+
+          <i class="bi bi-rulers text-primary"></i>
+
+          <strong>Size :</strong>
+
+          {{ product.size }}
+
+        </p>
+
+
+        
+        <h4 class="text-success fw-bold mt-3">
+
+          {{ product.price | currency:'INR':'symbol':'1.0-0' }}
+
+        </h4>
+
+
+       
+        <div class="mb-3">
+
+          <span
+            *ngIf="product.isStock"
+            class="badge bg-success px-3 py-2">
+
+            <i class="bi bi-check-circle-fill"></i>
+
+            In Stock
+
+          </span>
+
+
+          <span
+            *ngIf="!product.isStock"
+            class="badge bg-danger px-3 py-2">
+
+            <i class="bi bi-x-circle-fill"></i>
+
+            Out of Stock
+
+          </span>
+
+        </div>
+
+
+      
+        <button
+          class="btn btn-dark w-100 rounded-pill"
+          [routerLink]="['/product-details', product.productId]">
+
+          <i class="bi bi-eye-fill"></i>
+
+          View Details
+
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
